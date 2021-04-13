@@ -1,0 +1,11 @@
+{
+    "username": "manolo_enriquez",
+    "password": "password",
+    "img": "assets/memoji.jpeg",
+    "name": {
+        "first": "Manolo",
+        "last": "Enriquez"
+    },
+    "email": "manolo_enriquez@dlsu.edu.ph",
+    "bio": "Hi I am Manolo Enriquez 👋! I am a computer science student from De La Salle University with a passion for learning technology and exploring new opportunities."
+}
