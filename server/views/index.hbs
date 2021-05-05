@@ -1,0 +1,108 @@
+<!-- Page Header -->
+<header class="masthead pt-5">
+  
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <div class="site-heading">
+          <form action="" class="d-flex">
+            <input type="text" name="search" placeholder="Search content here" id="search" class="form-control">
+            <button type="submit" class="btn btn-primary py-0 px-3 rounded">
+              <i class="fas fa-search"></i>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Main Content -->
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8 col-md-10 mx-auto">
+
+      {{#each posts}}
+      <div class="post-preview">
+        <a href="{{this.link}}">
+          <h2 class="post-title">
+            {{this.title}}
+          </h2>
+          <h3 class="post-subtitle">
+            {{this.subtitle}}
+          </h3>
+        </a>
+        <p class="post-meta">Posted by
+          <a href="{{this.author.link}}">{{this.author.name}}</a>
+          on {{this.postedOn}}
+        </p>
+      </div>
+      {{/each}}
+
+
+
+      <div class="post-preview">
+        <a href="post.html">
+          <h2 class="post-title">
+            Man must explore, and this is exploration at its greatest
+          </h2>
+          <h3 class="post-subtitle">
+            Problems look mighty small from 150 miles up
+          </h3>
+        </a>
+        <p class="post-meta">Posted by
+          <a href="#">Start Bootstrap</a>
+          on September 24, 2019</p>
+      </div>
+      <hr>
+      <div class="post-preview">
+        <a href="postHeartbeat.html">
+          <h2 class="post-title">
+            I believe every human has a finite number of heartbeats. I don't intend to waste any of mine.
+          </h2>
+        </a>
+        <p class="post-meta">Posted by
+          <a href="#">manolo_enriquez</a>
+          on August 17, 2020</p>
+      </div>
+      <hr>
+      <div class="post-preview">
+        <a href="postGenshin.html">
+          <h2 class="post-title">
+            My Top 4 Five-Star Characters in Genshin Impact
+          </h2>
+        </a>
+        <p class="post-meta">Posted by
+          <a href="#">GachaWhale21</a>
+          on February 20, 2021</p>
+      </div>
+      <hr>
+      <div class="post-preview">
+        <a href="postPC.html">
+          <h2 class="post-title">
+            PC Components That Matter in Gaming
+          </h2>
+        </a>
+        <p class="post-meta">Posted by
+          <a href="#">randomtechguy</a>
+          on January 20, 2021</p>
+      </div>
+      <hr>
+      <div class="post-preview">
+        <a href="postTech.html">
+          <h2 class="post-title">
+            My Struggles with Web Development
+          </h2>
+        </a>
+        <p class="post-meta">Posted by
+          <a href="#">NONAME</a>
+          on March 30, 2021</p>
+      </div>
+      <hr>
+      <!-- Pager -->
+      <div class="clearfix">
+        <a class="btn btn-primary float-end" href="#">Older Posts &rarr;</a>
+      </div>
+    </div>
+  </div>
+</div>

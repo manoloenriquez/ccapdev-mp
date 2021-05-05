@@ -1,0 +1,42 @@
+<!-- Page Header -->
+<header class="masthead" style="background-image: url({{headerimg}})">
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <div class="post-heading">
+          <h1>{{title}}</h1>
+          <span class="meta">Posted by
+            <a href="{{author.link}}">{{author.name}}</a>
+            on {{postedOn}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Post Content -->
+<article>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+          <p>
+            {{content}}
+          </p>
+          <div class="comments-section"> 
+            <hr>
+            {{#each comments}}
+            <h4>{{this.username}}</h4>
+            <h6>{{this.content}}</h6>
+            <hr>
+            {{/each}}
+
+            <form action="">
+              <textarea id = "comment" name = "comment" rows ="5" columns = "60" class="form-control mb-3"></textarea>
+              <input type="submit" value="Post comment" class="btn btn-primary">
+            </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

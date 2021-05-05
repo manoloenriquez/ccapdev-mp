@@ -1,0 +1,15 @@
+.form-container {
+  min-width: 350px;
+  padding: 2rem;
+  text-align: center;
+  /* box-shadow: 5px 10px #888888; */
+}
+
+.login {
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('/images/formbg.jpg');
+  /* background-image: url('./assets/background.jpg'); */
+  background-position: center;
+  background-size: cover;
+  /* background- */
+}
+
