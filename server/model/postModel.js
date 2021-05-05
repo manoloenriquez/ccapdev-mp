@@ -3,7 +3,9 @@ const mongoose = require('mongoose')
 const postSchema = new mongoose.Schema({
   slug: {
     type: String,
-    required: true
+    required: true,
+    unique: true,
+    dropDups: true
   },
   title: {
     type: String,
@@ -24,6 +26,9 @@ const postSchema = new mongoose.Schema({
   votes: {
     type: Number,
     default: 0
+  },
+  headerImg: {
+    type: String,
   }
 })
 
