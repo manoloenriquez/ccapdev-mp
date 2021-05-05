@@ -3,7 +3,7 @@
 
 ## Instructions
 
-### Initialize project
+### Initialize dependencies
 If this is your first time running the project run this command:
 ```
 npm install
