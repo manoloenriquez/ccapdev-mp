@@ -1,9 +1,9 @@
 # CCAPDEV MP
-## S15 Abaca – Chavez – Enriquez 
+### S15 Abaca – Chavez – Enriquez 
 
 ## Instructions
 
-### Initialize project
+### Initialize dependencies
 If this is your first time running the project run this command:
 ```
 npm install
