@@ -9,12 +9,12 @@ If this is your first time running the project run this command:
 npm install
 ```
 
-### Run project without auto reload
+### Run project
 ```
 npm start
 ```
 
-### Run project with auto reload
+### Run project with hot reload
 ```
 npm run dev
 ```
