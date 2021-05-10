@@ -1,7 +1,9 @@
 const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
 
-const url = 'mongodb://127.0.0.1:27017/ccapdev-mp'
+require('dotenv').config()
+
+const url = process.env.DB_URL
 
 // Schemas
 const userModel = require('./userModel')
@@ -12,7 +14,7 @@ const saltRounds = 10
 
 module.exports = {
   connect: () => {
-    mongoose.connect(url, { useUnifiedTopology: true, useNewUrlParser: true }, (err) => {
+    mongoose.connect(url, { useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true }, (err) => {
       if (err) throw err
       console.log(`Database connected to ${url}`)
     })

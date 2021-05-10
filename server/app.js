@@ -2,14 +2,17 @@ const createError = require('http-errors')
 const express = require('express')
 const hbs = require('express-handlebars')
 const session = require('express-session')
+const MongoStore = require('connect-mongo')
 
 const indexRoute = require('./routes/index')
 const usersRoute = require('./routes/users')
 const postsRoute = require('./routes/posts')
 const dashboardRoute = require('./routes/dashboard')
 
+require('dotenv').config()
+
 const app = express()
-const port = 8080
+const port = process.env.PORT
 
 app.listen(port, () => console.log(`Server running on port ${port}`))
 
@@ -25,7 +28,10 @@ app.use(session({
   secret: 'ccapdev-mp-session',
   name: 'uniqueSessionID',
   saveUninitialized: false,
-  resave: false
+  resave: false,
+  store: MongoStore.create({
+    mongoUrl: process.env.DB_URL
+  })
 }))
 
 app.use(express.json())

@@ -69,23 +69,11 @@ router.post('/login', async (req, res) => {
       return
     }
 
-    // res.locals._id = data._id.toString()
-    // res.locals.username = req.body.username
-    // next()
-    console.log(res.locals)
     req.session.loggedIn = true
     req.session._id = data._id.toString()
     req.session.username = req.body.username
     res.redirect('/')
-    
-  }, 
-  // (req, res) => {
-  //   console.log(res.locals)
-  //   req.session.loggedIn = true
-  //   req.session._id = res.locals._id
-  //   req.session.username = res.locals.username
-  //   res.redirect('/')
-  // }
+  }
 )
 
 router.get('/logout', (req, res) => {
@@ -96,6 +84,5 @@ router.get('/logout', (req, res) => {
   console.log('Logged out')
   res.redirect('/')
 })
-
 
 module.exports = router
