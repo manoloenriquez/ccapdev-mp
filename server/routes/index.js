@@ -68,9 +68,9 @@ router.get('/enterinfo', async (req, res) => {
   })
 })
 
-router.post('/enterinfo', async (req, res) => {
+router.post('/enterinfo', (req, res) => {
   db.updateUser(req.session._id, req.body)
-
+  console.log(req.body)
   res.redirect('/dashboard')
 })
 

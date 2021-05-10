@@ -39,8 +39,6 @@ router.post('/editaccount', (req, res) => {
 })
 
 router.post('/deleteaccount', (req, res) => {
-  console.log(req)
-  
   db.delAccount(req.session._id)
 
   req.session.destroy(err => {
