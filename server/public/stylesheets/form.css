@@ -3,6 +3,13 @@
   padding: 2rem;
   text-align: center;
   /* box-shadow: 5px 10px #888888; */
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.form-container p, .form-container a, .form-container li, .form-container h3 {
+  margin-top: 0;
+  margin-bottom: 15px;
 }
 
 .login {

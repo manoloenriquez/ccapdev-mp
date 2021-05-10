@@ -23,7 +23,7 @@ module.exports = {
     let user = await userModel.findOne({ 'username': info.username }, 'username')
     
     if (user != null) {
-      return false
+      return null
     }
 
     // bcrypt.hash(password, saltRounds, (err, hash) => {
@@ -34,9 +34,11 @@ module.exports = {
 
     let hash = await bcrypt.hash(password, saltRounds)
 
-    await userModel.create({ ...info, password: hash })
+    let data = await userModel.create({ ...info, password: hash })
 
-    return true
+    console.log(data)
+
+    return data
   },
   login: async (username, password) => {
     let user = await userModel.findOne({ 'username': username })

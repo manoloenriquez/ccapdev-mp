@@ -1,0 +1,43 @@
+<h1>Welcome {{ data.fName }} {{ data.lName }}!</h1>
+<p class="lead">Please enter the necessary information below.</p>
+
+<!-- Profile Picture Header -->
+<div class="container text-center">
+  <a href="" id="dp-img-link" class="text-decoration-none" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    <img src="{{ data.avatar }}" class="rounded-circle" id="editableDP" alt="Profile Picture" style="width: 140px; height: 140px; object-fit: cover;">
+    <p class="pt-2">Change picture</p>
+  </a>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Change picture</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form name="imgForm" onsubmit="updateImg(event)">
+        <div class="modal-body">
+          <p class="lead">Enter image url or filename</p>
+          <input type="text" name="imgUrl" class="form-control">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <input type="submit" value="Save changes" class="btn btn-primary">
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Bio -->
+<div class="mt-3">
+  <p class="lead">Bio</p>
+  <form name="bioForm" action="/enterinfo" method="POST" class="">
+    <textarea name="bio" rows="8" class="form-control mb-3"></textarea>
+    <input type="submit" value="Save changes" class="btn btn-primary">
+  </form>
+</div>
+  
+</form>

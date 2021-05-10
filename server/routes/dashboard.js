@@ -36,7 +36,6 @@ router.get('/editaccount', async (req, res) => {
 
 router.post('/editaccount', (req, res) => {
   db.updateUser(req.session._id, req.body)
-  console.log(req.body)
 })
 
 router.post('/deleteaccount', (req, res) => {

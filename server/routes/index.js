@@ -32,7 +32,7 @@ router.get('/register', (req, res, next) => {
   })
 })
 
-router.post('/register', (req, res, next) => {
+router.post('/register', async (req, res, next) => {
   const user = {
     username: req.body.username,
     fName: req.body.fName,
@@ -42,9 +42,36 @@ router.post('/register', (req, res, next) => {
 
   const password = req.body.password
 
-  db.register(user, password)
+  const data = await db.register(user, password)
 
-  res.redirect('/login')
+  req.session.loggedIn = true
+  req.session._id = data._id.toString()
+  req.session.username = req.body.username
+
+  res.redirect('/enterinfo')
+})
+
+router.get('/enterinfo', async (req, res) => {
+  if (!req.session.loggedIn) {
+    res.redirect('/register')
+    return
+  }
+
+  let data = await db.getUserData(req.session._id)
+
+  res.render('userinfo', {
+    layout: 'form',
+    title: 'Enter info',
+    loggedIn: req.session.loggedIn,
+    username: req.session.username,
+    data: data
+  })
+})
+
+router.post('/enterinfo', async (req, res) => {
+  db.updateUser(req.session._id, req.body)
+
+  res.redirect('/dashboard')
 })
 
 router.get('/login', (req, res, next) => {
