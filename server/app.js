@@ -5,9 +5,10 @@ const session = require('express-session')
 const MongoStore = require('connect-mongo')
 
 const indexRoute = require('./routes/index')
-const usersRoute = require('./routes/users')
-const postsRoute = require('./routes/posts')
+const userRoute = require('./routes/user')
+const postRoute = require('./routes/post')
 const dashboardRoute = require('./routes/dashboard')
+const searchRoute = require('./routes/search')
 
 require('dotenv').config()
 
@@ -42,9 +43,10 @@ app.use(express.static('./public'))
 require('./model/db').connect()
 
 app.use('/', indexRoute)
-app.use('/users', usersRoute)
-app.use('/posts', postsRoute)
+app.use('/user', userRoute)
+app.use('/post', postRoute)
 app.use('/dashboard', dashboardRoute)
+app.use('/search', searchRoute)
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

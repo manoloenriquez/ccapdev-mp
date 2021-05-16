@@ -20,25 +20,10 @@ module.exports = {
     })
   },
   register: async (info, password) => {
-    let user = await userModel.findOne({ 'username': info.username }, 'username')
-    
-    if (user != null) {
-      return null
-    }
-
-    // bcrypt.hash(password, saltRounds, (err, hash) => {
-    //   userModel.create({...info, password: hash}, err => {
-    //     if (err) throw err
-    //   })
-    // })
-
     let hash = await bcrypt.hash(password, saltRounds)
+    let user = await userModel.create({ ...info, password: hash })
 
-    let data = await userModel.create({ ...info, password: hash })
-
-    console.log(data)
-
-    return data
+    return user
   },
   login: async (username, password) => {
     let user = await userModel.findOne({ 'username': username })
@@ -86,12 +71,27 @@ module.exports = {
   modifyPost: async (post) => {
 
   },
-  delete: async (model, id) => {
-    await model.findByIdAndDelete(id)
-  },
   getComments: async (postSlug) => {
     let comments = await commentModel.find({ 'postSlug': postSlug })
 
     return comments
-  }
+  },
+  get: async (model, projection, key) => {
+    return await model.find(key, projection).lean()
+  },
+  getOne: async (model, projection, key) => {
+    return await model.findOne(key, projection).lean()
+  },
+  getById: async (model, projection, id) => {
+    return await model.findById(id, projection)
+  },
+  delete: async (model, id) => {
+    await model.findByIdAndDelete(id)
+  },
+  create: async (model, data) => {
+    return await model.create(data)
+  },
+  update: async (model, key, data) => {
+    await model.updateOne(key, { $set: { ...data } })
+  },
 }

@@ -1,14 +1,14 @@
 <!-- Page Header -->
-<header class="masthead" style="background-image: url({{headerimg}})">
-  <div class="overlay"></div>
+<header class="masthead" style="background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('{{data.headerimg}}') !important">
+  {{!-- <div class="overlay"></div> --}}
   <div class="container">
     <div class="row">
       <div class="col-lg-8 col-md-10 mx-auto">
         <div class="post-heading">
-          <h1>{{title}}</h1>
+          <h1>{{data.title}}</h1>
           <span class="meta">Posted by
-            <a href="{{author.link}}">{{author.name}}</a>
-            on {{postedOn}}</span>
+            <a href="{{data.author.link}}">{{data.author.name}}</a>
+            on {{data.date}}</span>
         </div>
       </div>
     </div>
@@ -20,21 +20,37 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-8 col-md-10 mx-auto">
-          <p>
-            {{content}}
-          </p>
-          <div class="comments-section"> 
-            <hr>
-            {{#each comments}}
-            <h4>{{this.username}}</h4>
-            <h6>{{this.content}}</h6>
-            <hr>
-            {{/each}}
+        <p class="lead">
+          {{data.content}}
+        </p>
+        <div id="comments-section"> 
+          <hr>
 
-            <form action="">
-              <textarea id = "comment" name = "comment" rows ="5" columns = "60" class="form-control mb-3"></textarea>
-              <input type="submit" value="Post comment" class="btn btn-primary">
-            </form>
+          <div id="comments-container"> 
+          {{#each comments}}
+          <a href="/user/{{this.username}}" class="d-flex">
+            <img src="{{this.avatar}}" alt="{{this.username}}" class="avatar me-2">
+            <div>
+              <h4>{{this.username}}</h4>
+              <h4 class="fw-lighter">{{this.date}}</h4>
+            </div>
+          </a>
+          
+          <p class="m-0 lead">{{this.content}}</p>
+          <hr>
+          {{/each}}
+          </div>  
+
+          {{#if loggedIn}}
+          <form id="postComment" action="">
+            <textarea id="comment" name="comment" rows="5" columns="60" class="form-control mb-3"></textarea>
+            <input type="submit" value="Post comment" class="btn btn-primary float-end">
+          </form>
+          {{/if}}
+
+          {{#unless loggedIn}}
+          <h4 class="text-center">You must login before posting a comment.</h4>
+          {{/unless}}
         </div>
       </div>
     </div>

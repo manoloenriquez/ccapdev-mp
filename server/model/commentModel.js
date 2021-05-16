@@ -1,11 +1,11 @@
 const mongoose = require('mongoose')
 
 const commentSchema = new mongoose.Schema({
-  userID: {
+  username: {
     type: String,
     required: true
   },
-  postID: {
+  postslug: {
     type: String,
     required: true
   },
@@ -20,6 +20,10 @@ const commentSchema = new mongoose.Schema({
   votes: {
     type: Number,
     default: 0
+  },
+  avatar: {
+    type: String,
+    required: true
   }
 })
 

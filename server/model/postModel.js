@@ -15,9 +15,10 @@ const postSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  auhorID: {
-    type: String,
-    required: true
+  author: {
+    // type: String,
+    username: { type: String },
+    name: { type: String }
   },
   date: {
     type: Date,
@@ -27,7 +28,7 @@ const postSchema = new mongoose.Schema({
     type: Number,
     default: 0
   },
-  headerImg: {
+  headerimg: {
     type: String,
   }
 })
