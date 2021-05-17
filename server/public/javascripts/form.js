@@ -1,39 +1,39 @@
-const handleLogin = event => {
-  event.preventDefault()
-
+function checkusername(event) {
+  let username = event.target.value
   let xhttp = new XMLHttpRequest()
 
-  xhttp.open('POST', '/login', true)
-  xhttp.setRequestHeader('Content-type', 'application/json')
   xhttp.onreadystatechange = () => {
-    if (this.readyState == 4 && this.status == 200) {
-      window.location.href = '/'
+    if (xhttp.readyState == 4 && xhttp.status == 200) {
+      if (xhttp.responseText !== '') {
+        document.getElementById('username').classList.add('is-invalid')
+        document.getElementById('submit').disabled = true
+      } else {
+        document.getElementById('username').classList.remove('is-invalid')
+        document.getElementById('submit').disabled = false
+      }
     }
   }
 
-  let user = {
-    username: document.getElementById('username').value,
-    password: document.getElementById('password').value
-  }
-
-  xhttp.send(JSON.stringify(user))
+  xhttp.open('GET', `/getusername?username=${username}`, true)
+  xhttp.send()
 }
 
-const handleRegister = event => {
-  event.preventDefault()
-
+function checkemail(event) {
+  let email = event.target.value
   let xhttp = new XMLHttpRequest()
 
-  xhttp.open('POST', '/register', true)
-  xhttp.setRequestHeader('Content-type', 'application/json')
-
-  let user = {
-    username: document.getElementById('username').value,
-    password: document.getElementById('password').value,
-    fName: document.getElementById('fname').value,
-    lName: document.getElementById('lname').value,
-    email: document.getElementById('email').value
+  xhttp.onreadystatechange = () => {
+    if (xhttp.readyState == 4 && xhttp.status == 200) {
+      if (xhttp.responseText !== '') {
+        document.getElementById('email').classList.add('is-invalid')
+        document.getElementById('submit').disabled = true
+      } else {
+        document.getElementById('email').classList.remove('is-invalid')
+        document.getElementById('submit').disabled = false
+      }
+    }
   }
 
-  xhttp.send(JSON.stringify(user))
+  xhttp.open('GET', `/getemail?email=${email}`, true)
+  xhttp.send()
 }

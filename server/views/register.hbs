@@ -1,6 +1,6 @@
 <h1 class="mb-3">Sign up</h1>
 <form class="d-flex flex-column" method="POST" action="/register">
-  <input class="form-control mb-3" type="text" name="username" id="username" placeholder="Username" />
+  <input class="form-control mb-3" type="text" name="username" id="username" placeholder="Username" onkeyup="checkusername(event)" />
   <input class="form-control mb-3" type="password" name="password" id="password" placeholder="Password" />
 
   <div class="d-flex mb-3">
@@ -8,9 +8,9 @@
     <input class="form-control ms-1" type="text" name="lName" id="lName" placeholder="Last Name">
   </div>
   
-  <input type="email" name="email" id="email" class="form-control mb-3" placeholder="Email">
+  <input type="email" name="email" id="email" class="form-control mb-3" placeholder="Email" onkeyup="checkemail(event)">
   
-  <input class="btn btn-primary" type="submit" value="Sign up">
+  <input class="btn btn-primary" id="submit" type="submit" value="Sign up">
 </form>
 
 <p class="pt-3 m-0">Already registered? <a href="/login" class="text-decoration-underline">Log in now!</a></p>

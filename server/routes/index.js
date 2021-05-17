@@ -129,4 +129,14 @@ router.get('/getavatar', async (req, res) => {
   res.send(data.avatar)
 })
 
+router.get('/getusername', async (req, res) => {
+  let data = await db.getOne(User, 'username', { 'username': req.query.username })
+  res.status(200).send(data == null ? '' : data.username)
+})
+
+router.get('/getemail', async (req, res) => {
+  let data = await db.getOne(User, 'email', { 'email': req.query.email })
+  res.status(200).send(data == null ? '' : data.email)
+})
+
 module.exports = router
