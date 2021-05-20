@@ -11,15 +11,15 @@ router.get('/', async (req, res, next) => {
   // res.send('respond with a resource')
 
   let data = {
-    slug: 'my-struggles-with-web-development',
-    title: 'My Struggles with Web Development',
-    content: `I recently just started learning about web development, and I find it to be an interesting topic. The idea of being able to create a website and make it look exactly how I want it to look keeps me motivated to learn  more about it despite not knowing anything about it prior to starting the learning process. The idea is simple enough.  Write some HTML, then change how it looks using CSS, but once I started making some webpages on my own, I was overwhelmed  with a lot of other things I don't know about. I struggled with this, until I found a learning resource called W3Shcools. After studying it for some time, I was finally able to understand the things I don't know about web development, particularly  CSS, since W3Shcools had an in-depth explanation for every property I can edit to make a website look the way I want it to.  Though I still have much to learn, I feel more motivated to learn more about web development now that I was able to get through the hardest part of learning, which is taking the first steps into the unknown.`,
+    slug: 'i-believe-every-human-has-a-finite-number-of-heartbeats-i-dont-intend-to-waste-any-of-mine',
+    title: `I believe every human has a finite number of heartbeats. I don't intend to waste any of mine`,
+    content: `Did you know that the human heart beats around 2 billion times in the coutse of a lifetime, well as the title of this article suggests, I don't intend to waste any of mine. There's a lot to do, and dreams  to accomplish, and I don't want to waste any time not doing anything to achieve these dreams of mine. I hope  this article will get you to reflect on the things you want to achieve and the things you want to do,  and I hope you will life your life to the fullest, lest you regret anything.`,
     author: {
-      username: 'NONAME',
-      name: 'Gabriel Chavez'
+      username: 'manolo_enriquez',
+      name: 'Manolo Enriquez'
     },
-    date: 'March 30, 2021',
-    headerimg: '/images/florian-olivo-4hbJ-eymZ1o-unsplash.jpg'
+    date: 'August 17, 2020',
+    headerimg: '/images/heartbeat.jfif'
   }
 
   await db.create(Post, data)
