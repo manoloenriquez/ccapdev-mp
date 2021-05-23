@@ -8,10 +8,6 @@ const Post = require('../model/postModel')
 
 const saltRounds = 10
 
-router.get('/test', (req, res) => {
-  res.send(req.query.content)
-})
-
 router.get('/', async (req, res, next) => {
   let posts = await db.get(Post, 'slug title subtitle author date', {})
 
@@ -61,7 +57,9 @@ router.get('/enterinfo', async (req, res) => {
     return
   }
 
-  let data = await db.getUserData(req.session._id)
+  // let data = await db.getUserData(req.session._id)
+
+  let data = await db.getById(User, '', req.session._id)
 
   res.render('userinfo', {
     layout: 'form',
@@ -72,9 +70,11 @@ router.get('/enterinfo', async (req, res) => {
   })
 })
 
-router.post('/enterinfo', (req, res) => {
-  db.updateUser(req.session._id, req.body)
-  console.log(req.body)
+router.post('/enterinfo', async (req, res) => {
+  // db.updateUser(req.session._id, req.body)
+
+  await db.update(User, { _id: req.session._id }, req.body)
+
   res.redirect('/dashboard')
 })
 

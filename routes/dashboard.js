@@ -3,16 +3,27 @@ const router = express.Router()
 
 const db = require('../model/db')
 
-router.get('/', (req, res) => {
+const User = require('../model/userModel')
+const Post = require('../model/postModel')
+
+router.get('/', async (req, res) => {
   if (!req.session.loggedIn) {
     res.redirect('/login')
     return
   }
 
-  // res.render('', {
-  //   layout: 'dashboard'
-  // })
-  res.redirect('/dashboard/editaccount')
+  let data = await db.getById(User, '', req.session._id)
+  let posts = await db.get(Post, '', { 'author.username':  req.session.username })
+
+  res.render('dashboard/profile', {
+    layout: 'dashboard',
+    title: 'Dashboard',
+    loggedIn: req.session.loggedIn,
+    username: req.session.username,
+    data: data,
+    posts: posts,
+    profile: true
+  })
 })
 
 router.get('/editaccount', async (req, res) => {
@@ -21,29 +32,34 @@ router.get('/editaccount', async (req, res) => {
     return
   }
 
-  let data = await db.getUserData(req.session._id)
-
-  console.log(data)
+  let data = await db.getById(User, '', req.session._id)
 
   res.render('dashboard/editaccount', {
     layout: 'dashboard',
     title: 'Dashboard',
     loggedIn: req.session.loggedIn,
     username: req.session.username,
-    data: data
+    data: data,
+    edit: true
   })
 })
 
-router.post('/editaccount', (req, res) => {
-  db.updateUser(req.session._id, req.body)
-})
+router.get('/manageposts', async (req, res) => {
+  let posts = await db.get(Post, '', { 'author.username': req.session.username })
 
-router.post('/deleteaccount', (req, res) => {
-  db.delAccount(req.session._id)
+  posts.forEach((post) => {
+    post.date = post.date.toLocaleDateString()
+  })
 
-  req.session.destroy(err => {
-    if (err) throw err
+  res.render('dashboard/manageposts', {
+    layout: 'dashboard',
+    title: 'Dashboard',
+    loggedIn: req.session.loggedIn,
+    username: req.session.username,
+    posts: posts,
+    manage: true
   })
 })
+
 
 module.exports = router

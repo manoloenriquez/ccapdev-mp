@@ -1,39 +1,27 @@
-function checkusername(event) {
-  let username = event.target.value
-  let xhttp = new XMLHttpRequest()
+async function checkusername() {
+  let username = document.getElementById('username').value
 
-  xhttp.onreadystatechange = () => {
-    if (xhttp.readyState == 4 && xhttp.status == 200) {
-      if (xhttp.responseText !== '') {
-        document.getElementById('username').classList.add('is-invalid')
-        document.getElementById('submit').disabled = true
-      } else {
-        document.getElementById('username').classList.remove('is-invalid')
-        document.getElementById('submit').disabled = false
-      }
-    }
+  let result = await fetch(`/api/checkusername?username=${username}`).then(res => res.json())
+
+  if (result) {
+    document.getElementById('username').classList.remove('is-invalid')
+    document.getElementById('submit').disabled = false
+  } else {
+    document.getElementById('username').classList.add('is-invalid')
+    document.getElementById('submit').disabled = true
   }
-
-  xhttp.open('GET', `/getusername?username=${username}`, true)
-  xhttp.send()
 }
 
-function checkemail(event) {
-  let email = event.target.value
-  let xhttp = new XMLHttpRequest()
+async function checkemail() {
+  let email = document.getElementById('email').value
 
-  xhttp.onreadystatechange = () => {
-    if (xhttp.readyState == 4 && xhttp.status == 200) {
-      if (xhttp.responseText !== '') {
-        document.getElementById('email').classList.add('is-invalid')
-        document.getElementById('submit').disabled = true
-      } else {
-        document.getElementById('email').classList.remove('is-invalid')
-        document.getElementById('submit').disabled = false
-      }
-    }
+  let result = await fetch(`/api/checkemail?email=${email}`).then(res => res.json())
+
+  if (result) {
+    document.getElementById('email').classList.remove('is-invalid')
+    document.getElementById('submit').disabled = false
+  } else {
+    document.getElementById('email').classList.add('is-invalid')
+    document.getElementById('submit').disabled = true
   }
-
-  xhttp.open('GET', `/getemail?email=${email}`, true)
-  xhttp.send()
 }

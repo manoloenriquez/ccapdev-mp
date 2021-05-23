@@ -25,9 +25,42 @@ router.get('/', async (req, res, next) => {
   await db.create(Post, data)
 })
 
+router.get('/create', (req, res) => {
+  res.render('posts/create', {
+    title: 'Create Post',
+    loggedIn: req.session.loggedIn,
+    username: req.session.username
+  })
+})
+
+router.post('/create', async (req, res) => {
+  let { fName, lName } = await db.getById(User, 'fName lName', req.session._id)
+  console.log(req.body)
+  let data = { 
+    ...req.body,
+    author: {
+      username: req.session.username,
+      name: `${fName} ${lName}`
+    } 
+  }
+
+  let post = await db.create(Post, data)
+  res.send(post)
+})
+
 router.get('/:slug', async (req, res) => {
   let post = await db.getOne(Post, '', { slug: req.params.slug })
   let comments = await db.get(Comment, '', { postslug: req.params.slug })
+
+  if (post == null) {
+    res.render('error', {
+      title: 'Post not found',
+      loggedIn: req.session.loggedIn,
+      username: req.session.username,
+      message: 'Post not found'
+    })
+    return
+  }
 
   post.date = post.date.toDateString()
 

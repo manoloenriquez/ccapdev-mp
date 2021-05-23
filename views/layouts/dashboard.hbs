@@ -25,9 +25,27 @@
       <div class="bg-light border-right" id="sidebar-wrapper">
         <!-- <div class="sidebar-heading">Start Bootstrap</div> -->
         <div class="list-group list-group-flush p-3">
+          {{#if profile}}
+          <a href="/dashboard" class="list-group-item list-group-item-action bg-primary rounded text-light">Profile</a>
+          {{/if}}
+          {{#unless profile}}
           <a href="/dashboard" class="list-group-item list-group-item-action bg-light rounded">Profile</a>
+          {{/unless}}
+
+          {{#if edit}}
           <a href="/dashboard/editaccount" class="list-group-item list-group-item-action bg-primary rounded text-light">Edit Account Details</a>
+          {{/if}}
+          {{#unless edit}}
+          <a href="/dashboard/editaccount" class="list-group-item list-group-item-action bg-light rounded">Edit Account Details</a>
+          {{/unless}}
+
+          {{#if manage}}
+          <a href="/dashboard/manageposts" class="list-group-item list-group-item-action bg-primary rounded text-light">Manage Posts</a>
+          {{/if}}
+          {{#unless manage}}
           <a href="/dashboard/manageposts" class="list-group-item list-group-item-action bg-light rounded">Manage Posts</a>
+          {{/unless}}
+
           <a href="/logout" class="list-group-item list-group-item-action bg-light rounded">Sign out</a>
           <button id="delete-item" class="list-group-item list-group-item-action bg-light rounded">Delete account</button>
         </div>

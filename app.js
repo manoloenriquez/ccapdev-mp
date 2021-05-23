@@ -9,6 +9,7 @@ const userRoute = require('./routes/user')
 const postRoute = require('./routes/post')
 const dashboardRoute = require('./routes/dashboard')
 const searchRoute = require('./routes/search')
+const apiRoute = require('./routes/api')
 
 require('dotenv').config()
 
@@ -47,6 +48,7 @@ app.use('/user', userRoute)
 app.use('/post', postRoute)
 app.use('/dashboard', dashboardRoute)
 app.use('/search', searchRoute)
+app.use('/api', apiRoute)
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

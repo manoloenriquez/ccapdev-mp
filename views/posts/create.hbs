@@ -1,0 +1,28 @@
+<div class="container mt-5">
+  <h1 class="text-uppercase text-center">Create Post</h1>
+  <hr>
+  <form name="createpost" id="createpost">
+
+    <div class="my-3">
+      <label for="title" class="h2 text-uppercase">Title:</label>
+      <input type="text" name="title" class="form-control">
+    </div>
+
+    <div class="my-3">
+      <label for="content" class="h2 text-uppercase">Content:</label>
+      <textarea name="content" cols="30" rows="10" class="form-control"></textarea>
+    </div>
+    
+    <div class="my-3">
+      <label for="headerimg" class="h2 text-uppercase">Header image url:</label>
+      <input type="text" name="headerimg" class="form-control">
+    </div>
+
+    <div class="my-3">
+      <label for="slug" class="h2 text-uppercase">Slug:</label>
+      <input type="text" name="slug" class="form-control" readonly>
+    </div>
+
+    <input type="submit" value="Create" class="btn btn-primary">
+  </form>
+</div>

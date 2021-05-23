@@ -1,0 +1,48 @@
+<div class="container">
+  <!-- Profile Header -->
+  <div class="container row m-2 p-2 m-md-3 p-md-3">
+    <div class="col-12 col-md-2 text-center">
+      <img src="{{ data.avatar }}" class="rounded-circle" id="dp" alt="Profile Picture" style="width: 140px; height: 140px; object-fit: cover;">
+    </div>
+    <div class="col-12 col-md-10 p-0 pt-3 px-md-3">
+      <h3>{{ data.username }}</h3>
+      <h4 style="color: var(--bs-gray)">{{ data.fName }} {{ data.lName }}</h4>
+      <ul class="list-unstyled" style="color: var(--bs-gray)">
+        <li>
+          <a id="email" class="text-decoration-none" style="color: var(--bs-gray)">
+            {{ data.email }}
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Bio -->
+  <div class="container mb-5">
+    <h3>Bio</h3>
+    <p id="bio" class="lead">
+      {{ data.bio }}
+    </p>
+  </div>
+
+  <!-- Posts -->
+  <div class="container mb-5">
+    <h3>Posted by me</h3>
+    <div class="row">
+
+      {{#each posts}}
+      <div class="card m-3 p-0" style="width: 18rem;">
+        <img class="card-img-top" src="{{ this.headerimg }}" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">
+            {{ this.title }}
+          </h5>
+          <p class="card-text text-truncate"> {{ this.content }} </p>
+          <a href="/post/{{ this.slug }}" class="btn btn-primary align-end">Go to post</a>
+        </div>
+      </div>
+      {{/each}}
+    </div>
+
+  </div>
+</div>
