@@ -23,6 +23,14 @@ router.get('/', async (req, res, next) => {
   })
 })
 
+router.get('/about', (req, res) => {
+  res.render('about', {
+    title: 'About',
+    loggedIn: req.session.loggedIn,
+    username: req.session.username
+  })
+})
+
 router.get('/register', (req, res, next) => {
   res.render('register', { 
     layout: 'form',
