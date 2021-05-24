@@ -9,7 +9,7 @@ const Post = require('../model/postModel')
 const saltRounds = 10
 
 router.get('/', async (req, res, next) => {
-  let posts = await db.get(Post, 'slug title subtitle author date', {})
+  let posts = await db.getLastResults(Post, 'slug title author date', {}, 3)
 
   posts.forEach((post) => {
     post.date = post.date.toDateString()
@@ -57,8 +57,6 @@ router.get('/enterinfo', async (req, res) => {
     return
   }
 
-  // let data = await db.getUserData(req.session._id)
-
   let data = await db.getById(User, '', req.session._id)
 
   res.render('userinfo', {
@@ -71,8 +69,6 @@ router.get('/enterinfo', async (req, res) => {
 })
 
 router.post('/enterinfo', async (req, res) => {
-  // db.updateUser(req.session._id, req.body)
-
   await db.update(User, { _id: req.session._id }, req.body)
 
   res.redirect('/dashboard')
@@ -93,17 +89,16 @@ router.get('/login', (req, res, next) => {
 })
 
 router.post('/login', async (req, res) => {
-    // let data = await db.login(req.body.username, req.body.password)
     let data = await db.getOne(User, '_id username password', { 'username': req.body.username })
     let valid = await bcrypt.compare(req.body.password, data.password)
 
-    // if (data == null) {
-    //   res.sendStatus(401)
-    //   return
-    // }
-
     if (!valid) {
-      res.sendStatus(401)
+      res.render('error', {
+        title: 'Invalid credentials',
+        loggedIn: req.session.loggedIn,
+        username: req.session.username,
+        message: 'Invalid credentials'
+      })
       return
     }
 
@@ -123,20 +118,19 @@ router.get('/logout', (req, res) => {
   res.redirect('/')
 })
 
-router.get('/getavatar', async (req, res) => {
-  let data = await db.getById(User, 'avatar', req.session._id)
+router.get('/allposts', async (req, res) => {
+  let posts =  await db.getDescending(Post, '', {})
 
-  res.send(data.avatar)
-})
+  posts.forEach((post) => {
+    post.date = post.date.toDateString()
+  })
 
-router.get('/getusername', async (req, res) => {
-  let data = await db.getOne(User, 'username', { 'username': req.query.username })
-  res.status(200).send(data == null ? '' : data.username)
-})
-
-router.get('/getemail', async (req, res) => {
-  let data = await db.getOne(User, 'email', { 'email': req.query.email })
-  res.status(200).send(data == null ? '' : data.email)
+  res.render('allpost', {
+    title: 'All Posts',
+    loggedIn: req.session.loggedIn,
+    username: req.session.username,
+    posts: posts
+  })
 })
 
 module.exports = router

@@ -9,14 +9,14 @@
     </thead>
     <tbody>
       {{#each posts}}
-      <tr>
+      <tr id="{{ this.slug }}">
         <th scope="row">{{ this.title }}</td>
         <td>{{ this.date }}</td>
         <td>
           <div class="btn-group">
             <a href="/post/{{ this.slug }}" class="btn btn-outline-primary">View post</a>
-            <button class="btn btn-outline-primary">Edit post</button>
-            <button class="btn btn-danger">
+            <a href="/dashboard/editpost/{{ this.slug }}" class="btn btn-outline-primary">Edit post</a>
+            <button class="btn btn-danger" data-slug="{{ this.slug }}"  onclick="deletePost(event)">
               <i class="fas fa-trash"></i>
             </button>
           </div>

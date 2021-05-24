@@ -20,6 +20,12 @@ module.exports = {
   getById: async (model, projection, id) => {
     return await model.findById(id, projection).lean()
   },
+  getLastResults: async (model, projection, key, num) => {
+    return await model.find(key, projection).sort('-date').limit(num).lean()
+  },
+  getDescending: async (model, projection, key) => {
+    return await model.find(key, projection).sort('-date').lean()
+  },
   deleteById: async (model, id) => {
     await model.findByIdAndDelete(id)
   },
@@ -33,6 +39,6 @@ module.exports = {
     await model.deleteOne(key)
   },
   delete: async (model, key) => {
-    await model.delete(key)
+    await model.deleteMany(key)
   }
 }

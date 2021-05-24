@@ -210,3 +210,21 @@ async function checkPassword() {
     submitBtn.disabled = true
   }
 }
+
+async function deletePost(event) {
+  let ans = confirm('Are you sure you want to delete this post?')
+
+  if (!ans) {
+    return
+  }
+
+  let slug = event.target.getAttribute('data-slug')
+
+  await fetch('/api/deletepost', {
+    method: 'DELETE',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ slug: slug })
+  })
+
+  document.getElementById(slug).remove()
+}

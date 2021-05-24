@@ -1,6 +1,5 @@
 <!-- Page Header -->
-<header class="masthead" style="background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('{{data.headerimg}}') !important">
-  {{!-- <div class="overlay"></div> --}}
+<header class="masthead mb-0" style="background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('{{data.headerimg}}') !important">
   <div class="container">
     <div class="row">
       <div class="col-lg-8 col-md-10 mx-auto">
@@ -28,14 +27,20 @@
 
           <div id="comments-container"> 
           {{#each comments}}
-          <a href="/user/{{this.username}}" class="d-flex">
-            <img src="{{this.avatar}}" alt="{{this.username}}" class="avatar me-2">
-            <div>
-              <h4>{{this.username}}</h4>
-              <h4 class="fw-lighter">{{this.date}}</h4>
+          <div id="{{ this._id }}">
+            <div class="d-flex justify-content-between">
+              <a href="/user/{{this.username}}" class="d-flex">
+                <img src="{{this.avatar}}" alt="{{this.username}}" class="avatar me-2">
+                <div>
+                  <h4>{{this.username}}</h4>
+                  <h4 class="fw-lighter">{{this.date}}</h4>
+                </div>
+              </a>
+              {{#if this.isOwn}}
+              <button data-commentid="{{ this._id }}" class="btn btn-light p-2" style="height: 10%;" onclick="deleteComment(event)">...</button>
+              {{/if}}
             </div>
-          </a>
-          
+          </div>
           <p class="m-0 lead">{{this.content}}</p>
           <hr>
           {{/each}}

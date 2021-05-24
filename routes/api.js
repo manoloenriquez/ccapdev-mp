@@ -8,6 +8,12 @@ const User = require('../model/userModel')
 const Post = require('../model/postModel')
 const Comment = require('../model/commentModel')
 
+router.get('/getavatar', async (req, res) => {
+  let data = await db.getById(User, 'avatar', req.session._id)
+
+  res.send(data.avatar)
+})
+
 router.get('/checkemail', async (req, res) => {
   let data = await db.getOne(User, 'email', { 'email': req.query.email })
   let valid = data == null
@@ -63,6 +69,12 @@ router.delete('/deleteaccount', async (req, res) => {
 router.delete('/deletepost', async (req, res) => {
   await db.deleteOne(Post, { 'slug': req.body.slug })
   await db.delete(Comment, { 'postslug': req.body.slug })
+})
+
+router.delete('/deletecomment', async (req, res) => {
+  await db.deleteById(Comment, req.body.id)
+
+  res.send(true)
 })
 
 module.exports = router

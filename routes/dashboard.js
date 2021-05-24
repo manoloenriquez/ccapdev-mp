@@ -61,5 +61,17 @@ router.get('/manageposts', async (req, res) => {
   })
 })
 
+router.get('/editpost/:slug', async (req, res) => {
+  let post = await db.getOne(Post, '', { 'slug': req.params.slug })
+
+  res.render('dashboard/editpost', {
+    layout: 'dashboard',
+    title: 'Edit Post',
+    loggedIn: req.session.loggedIn,
+    username: req.session.username,
+    post: post
+  })
+})
+
 
 module.exports = router

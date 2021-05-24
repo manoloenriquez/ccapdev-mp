@@ -66,6 +66,7 @@ router.get('/:slug', async (req, res) => {
 
   comments.forEach((comment) => {
     comment.date = comment.date.toDateString()
+    comment.isOwn = comment.username == req.session.username
   })
 
   res.render('posts/post', {
