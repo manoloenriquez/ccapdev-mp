@@ -17,10 +17,6 @@ const commentSchema = new mongoose.Schema({
     type: Date,
     required: true
   },
-  votes: {
-    type: Number,
-    default: 0
-  },
   avatar: {
     type: String,
     required: true
