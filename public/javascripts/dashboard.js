@@ -228,3 +228,57 @@ async function deletePost(event) {
 
   document.getElementById(slug).remove()
 }
+
+async function editPost(event) {
+  event.preventDefault()
+  let oldslug = event.target.getAttribute('data-slug')
+  let form = document.forms.editpost
+  let headerimg = form.elements.headerimg.value
+  let isPath = headerimg.includes('/images/')
+  let isLink = headerimg.includes('https://') || headerimg.includes('http://')
+
+  if (!isPath && !isLink) {
+    headerimg = `/images/${headerimg}`
+  }
+
+  let data = {
+    slug: oldslug,
+    data: {
+      title: form.elements.title.value,
+      content: form.elements.content.value,
+      headerimg: headerimg,
+      slug: form.elements.slug.value
+    }
+  }
+
+  let result = await fetch('/api/updatepost', {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data)
+  }).then(res => res.json())
+
+  if (!result) return
+
+  window.location.href = '/dashboard/manageposts'
+}
+
+async function updateSlug(event) {
+  let form = document.forms.editpost
+  let title = event.target.value
+  let slug = title.replace(/[^\w\s]/gi, '')
+  slug = slug.replace(/\s+/g, '-').toLowerCase()
+  
+
+  if (title.toLowerCase() == form.elements.title.value.toLowerCase()) {
+    form.elements.slug.value = slug
+    return
+  }
+
+  let result = await fetch(`/api/checkslug?slug=${slug}`).then(res => res.json())
+
+  if (result > 0) {
+    slug = slug.concat(`-${result}`)
+  }
+
+  form.elements.slug.value = slug
+}

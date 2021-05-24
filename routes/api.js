@@ -56,6 +56,12 @@ router.put('/updatepassword', async (req, res) => {
   res.send(true)
 })
 
+router.put('/updatepost', async (req, res) => {
+  await db.update(Post, { 'slug': req.body.slug }, req.body.data)
+
+  res.send(true)
+})
+
 router.put('/updatecomment', async (req, res) => {
   await db.update(Comment, { _id: req.body.id }, req.body.data)
 
@@ -75,6 +81,8 @@ router.delete('/deleteaccount', async (req, res) => {
 router.delete('/deletepost', async (req, res) => {
   await db.deleteOne(Post, { 'slug': req.body.slug })
   await db.delete(Comment, { 'postslug': req.body.slug })
+
+  res.send(true)
 })
 
 router.delete('/deletecomment', async (req, res) => {

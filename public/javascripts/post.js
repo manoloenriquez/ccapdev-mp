@@ -88,7 +88,8 @@ $('#postComment').submit((event) => {
 
 $('input[name="title"]').keyup((event) => {
   let title = event.target.value
-  let slug = title.replace(/\s+/g, '-').toLowerCase()
+  let slug = title.replace(/[^\w\s]/gi, '')
+  slug = slug.replace(/\s+/g, '-').toLowerCase()
 
   $.get('/api/checkslug', { slug: slug }, result => {
     if (result > 0) {
