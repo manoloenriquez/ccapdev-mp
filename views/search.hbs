@@ -1,0 +1,25 @@
+<div class="container mt-5">
+  <div class="row">
+    <div class="mx-auto">
+      <h1 class="text-center">Results</h1>
+      <hr>
+      {{#each posts}}
+      <div class="post-preview">
+        <a href="/post/{{this.slug}}">
+          <h2 class="post-title">
+            {{this.title}}
+          </h2>
+          <h3 class="post-subtitle">
+            {{this.subtitle}}
+          </h3>
+        </a>
+        <p class="post-meta">Posted by
+          <a href="/user/{{this.author.username}}">{{this.author.username}}</a>
+          on {{this.date}}
+        </p>
+      </div>
+      {{/each}}
+      <hr>
+    </div>
+  </div>
+</div>
