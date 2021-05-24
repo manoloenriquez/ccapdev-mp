@@ -56,6 +56,12 @@ router.put('/updatepassword', async (req, res) => {
   res.send(true)
 })
 
+router.put('/updatecomment', async (req, res) => {
+  await db.update(Comment, { _id: req.body.id }, req.body.data)
+
+  res.send(true)
+})
+
 router.delete('/deleteaccount', async (req, res) => {
   await db.deleteById(User, req.session._id)
 

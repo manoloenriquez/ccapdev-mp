@@ -27,18 +27,18 @@ module.exports = {
     return await model.find(key, projection).sort('-date').lean()
   },
   deleteById: async (model, id) => {
-    await model.findByIdAndDelete(id)
+    return await model.findByIdAndDelete(id)
   },
   create: async (model, data) => {
     return await model.create(data)
   },
   update: async (model, key, data) => {
-    await model.updateOne(key, { $set: { ...data } })
+    return await model.updateOne(key, { $set: { ...data } })
   },
   deleteOne: async (model, key) => {
-    await model.deleteOne(key)
+    return await model.deleteOne(key)
   },
   delete: async (model, key) => {
-    await model.deleteMany(key)
+    return await model.deleteMany(key)
   }
 }

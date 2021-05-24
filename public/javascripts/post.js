@@ -10,6 +10,38 @@ async function deleteComment(event) {
   document.getElementById(id).remove()
 }
 
+function editComment(event) {
+  let id = event.target.getAttribute('data-commentid')
+  let content = $(`#${id} p`).text()
+  console.log(content)
+  $(`#${id} p`).remove()
+  $(`#${id} hr`).remove()
+
+  let textarea = $(`<textarea data-commenteditid="${id}" class="form-control mb-3">${content}</textarea>`)
+  let editBtn = $(`<button data-commenteditid="${id}" class="btn btn-primary" onclick="updateComment(event)">Edit Comment</button>`)
+
+  $(`#${id}`).append(textarea, editBtn, '<hr>')
+}
+
+async function updateComment(event) {
+  let id = event.target.getAttribute('data-commenteditid')
+  let content = $(`textarea[data-commenteditid=${id}]`).val()
+
+  await fetch('/api/updatecomment', {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ id: id, data: { content: content } })
+  })
+
+  let p = $(`<p class="m-0 lead">${content}</p>`)
+
+  $(`textarea[data-commenteditid=${id}]`).remove()
+  $(`button[data-commenteditid=${id}]`).remove()
+  $(`#${id} hr`).remove()
+
+  $(`#${id}`).append(p, '<hr>')
+}
+
 $('#postComment').submit((event) => {
   event.preventDefault()
 
@@ -30,12 +62,24 @@ $('#postComment').submit((event) => {
                 `<h4 class="fw-lighter">${new Date(result.date).toDateString()}</h4>` + 
               '</div>' +
             '</a>' +
-          `<button data-commentid="${result._id}" class="btn" onclick="deleteComment(event)">...</button>` +
+            `<div class="dropdown">` +
+              `<button class="btn btn-light border p-3 d-flex align-items-center justify-content-center" style="height: 10px;" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                ...
+              </button>` +
+              `<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">` +
+                `<li>
+                  <button class="dropdown-item" data-commentid="${result._id}" onclick="editComment(event)">Edit</button>
+                </li>` +
+                `<li>
+                  <button class="dropdown-item" data-commentid="${result._id}" onclick="deleteComment(event)">Delete</button>
+                </li>` +
+              `</ul>` +
+            `</div>` +
           '</div>' +
           `<p class="m-0 lead">${result.content}</p>` + 
           '<hr>' +
         '</div>'
-        
+
       $('#comments-container').append(content)
       $('#comment').val('')
     })

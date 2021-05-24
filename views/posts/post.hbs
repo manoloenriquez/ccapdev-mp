@@ -36,13 +36,26 @@
                   <h4 class="fw-lighter">{{this.date}}</h4>
                 </div>
               </a>
+
               {{#if this.isOwn}}
-              <button data-commentid="{{ this._id }}" class="btn btn-light p-2" style="height: 10%;" onclick="deleteComment(event)">...</button>
+              <div class="dropdown">
+                <button class="btn btn-light border p-3 d-flex align-items-center justify-content-center" style="height: 10px;" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                  ...
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                  <li>
+                    <button class="dropdown-item" data-commentid="{{ this._id }}" onclick="editComment(event)">Edit</button>
+                  </li>
+                  <li>
+                    <button class="dropdown-item" data-commentid="{{ this._id }}" onclick="deleteComment(event)">Delete</button>
+                  </li>
+                </ul>
+              </div>
               {{/if}}
             </div>
+            <p class="m-0 lead">{{this.content}}</p>
+            <hr>
           </div>
-          <p class="m-0 lead">{{this.content}}</p>
-          <hr>
           {{/each}}
           </div>  
 
