@@ -17,6 +17,10 @@ module.exports = {
     res.send(valid)
   },
   checkUsername: async (req, res) => {
+    if (req.query.username.includes(' ')) {
+      res.send(false)
+      return
+    }
     let data = await db.getOne(User, 'username', { 'username': req.query.username })
     let valid = data == null
   
@@ -34,46 +38,50 @@ module.exports = {
     res.send(`${posts.length}`)
   },
   updateAccount: async (req, res) => {
-    await db.update(User, { _id: req.session._id }, req.body)
+    let result = await db.update(User, { _id: req.session._id }, req.body)
+    
+    if (req.body.username)
+      req.session.username = req.body.username
   
-    res.send(true)
+    res.send(result)
   },
   updatePassword: async (req, res) => {
     const saltRounds = 10
     let hash = await bcrypt.hash(req.body.password, saltRounds)
   
-    await db.update(User, { _id: req.session._id }, { password: hash })
+    let result = await db.update(User, { _id: req.session._id }, { password: hash })
   
-    res.send(true)
+    res.send(result)
   },
   updatePost: async (req, res) => {
-    await db.update(Post, { 'slug': req.body.slug }, req.body.data)
+    let result = await db.update(Post, { 'slug': req.body.slug }, req.body.data)
   
-    res.send(true)
+    res.send(result)
   },
   updateComment: async (req, res) => {
-    await db.update(Comment, { _id: req.body.id }, req.body.data)
+    let result = await db.update(Comment, { _id: req.body.id }, req.body.data)
   
-    res.send(true)
+    res.send(result)
   },
   deleteAccount: async (req, res) => {
-    await db.deleteById(User, req.session._id)
+    let result = await db.deleteById(User, req.session._id)
   
     req.session.destroy(err => {
       if (err) throw err
     })
   
-    res.send(true)
+    res.send(result)
   },
   deletePost: async (req, res) => {
-    await db.deleteOne(Post, { 'slug': req.body.slug })
-    await db.delete(Comment, { 'postslug': req.body.slug })
+    let result = await db.deleteOne(Post, { 'slug': req.body.slug })
+
+    if (result) await db.delete(Comment, { 'postslug': req.body.slug })
   
-    res.send(true)
+    res.send(result)
   },
   deleteComment: async (req, res) => {
-    await db.deleteById(Comment, req.body.id)
+    let result = await db.deleteById(Comment, req.body.id)
   
-    res.send(true)
+    res.send(result)
   }
 }

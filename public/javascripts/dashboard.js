@@ -40,17 +40,26 @@ async function updateName(event) {
     lName: form.elements.lName.value === '' ? form.elements.lName.placeholder : form.elements.lName.value
   }
 
-  await fetch('/api/updateaccount', {
+  let result = await fetch('/api/updateaccount', {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(data)
-  })
+  }).then(res => res.json())
 
   form.elements.fName.value = ''
-  form.elements.fName.placeholder = data.fName
-
   form.elements.lName.value = ''
-  form.elements.lName.placeholder = data.lName
+
+  if (result) {
+    form.elements.fName.placeholder = data.fName
+    form.elements.lName.placeholder = data.lName
+    document.getElementById('updatenamemsg').innerText = 'Successfully updated name!'
+    document.getElementById('updatenamemsg').classList.remove('text-danger')
+    document.getElementById('updatenamemsg').classList.add('text-success')
+  } else {
+    document.getElementById('updatenamemsg').innerText = 'Failed to update name.'
+    document.getElementById('updatenamemsg').classList.remove('text-success')
+    document.getElementById('updatenamemsg').classList.add('text-danger')
+  }
 }
 
 async function updateEmail(event) {
@@ -62,14 +71,24 @@ async function updateEmail(event) {
     email: form.elements.email.value === '' ? form.elements.email.placeholder : form.elements.email.value
   }
 
-  await fetch('/api/updateaccount', {
+  let result = await fetch('/api/updateaccount', {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(data)
   })
 
   form.elements.email.value = ''
-  form.elements.email.placeholder = data.email
+
+  if (result) {
+    form.elements.email.placeholder = data.email
+    document.getElementById('updateemailmsg').innerText = 'Successfully updated email!'
+    document.getElementById('updateemailmsg').classList.remove('text-danger')
+    document.getElementById('updateemailmsg').classList.add('text-success')
+  } else {
+    document.getElementById('updateemailmsg').innerText = 'Failed to update email.'
+    document.getElementById('updateemailmsg').classList.remove('text-success')
+    document.getElementById('updateemailmsg').classList.add('text-danger')
+  }
 }
 
 async function updateBio(event) {
@@ -97,14 +116,24 @@ async function updateUsername(event) {
     username: form.elements.username.value === '' ? form.elements.username.placeholder : form.elements.username.value
   }
 
-  await fetch('/api/updateaccount', {
+  let result = await fetch('/api/updateaccount', {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(data)
-  })
+  }).then(res => res.json())
 
   form.elements.username.value = ''
-  form.elements.username.placeholder = data.username
+  if (result) {
+    form.elements.username.placeholder = data.username
+    document.getElementById('loggedInUser').innerText = data.username
+    document.getElementById('updateusermsg').innerText = 'Successfully updated username!'
+    document.getElementById('updateusermsg').classList.remove('text-danger')
+    document.getElementById('updateusermsg').classList.add('text-success')
+  } else {
+    document.getElementById('updateusermsg').innerText = 'Failed to update username.'
+    document.getElementById('updateusermsg').classList.remove('text-success')
+    document.getElementById('updateusermsg').classList.add('text-danger')
+  }
 }
 
 async function updateImg(event) {
@@ -151,13 +180,22 @@ async function updatePassword(event) {
 
   form.elements.newPwd.classList.remove('is-invalid')
 
-  await fetch('/api/updatepassword', {
+  let result = await fetch('/api/updatepassword', {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(data)
   })
 
-  window.location.href = '/dashboard/editaccount'
+  // window.location.href = '/dashboard/editaccount'
+  if (result) {
+    document.getElementById('updatepasswordmsg').innerText = 'Successfully updated password!'
+    document.getElementById('updatepasswordmsg').classList.remove('text-danger')
+    document.getElementById('updatepasswordmsg').classList.add('text-success')
+  } else {
+    document.getElementById('updatepasswordmsg').innerText = 'Failed to update password.'
+    document.getElementById('updatepasswordmsg').classList.remove('text-success')
+    document.getElementById('updatepasswordmsg').classList.add('text-danger')
+  }
 }
 
 async function checkEmail() {
