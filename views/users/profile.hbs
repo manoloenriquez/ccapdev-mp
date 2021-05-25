@@ -21,7 +21,13 @@
   <div class="container mb-5">
     <h3>Bio</h3>
     <p id="bio" class="lead">
+      {{#if data.bio}}
       {{ data.bio }}
+      {{/if}}
+
+      {{#unless data.bio}}
+      This user has not inputted a bio.
+      {{/unless}}
     </p>
   </div>
 
@@ -44,7 +50,7 @@
       {{/each}}
 
       {{#unless posts}}
-      <p class="lead">No posts.</p>
+      <p class="lead">This user has not posted yet.</p>
       {{/unless}}
     </div>
 
