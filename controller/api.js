@@ -39,9 +39,11 @@ module.exports = {
   },
   updateAccount: async (req, res) => {
     let result = await db.update(User, { _id: req.session._id }, req.body)
-    
-    if (req.body.username)
+
+    if (req.body.username){
+      await db.updateMany(Post, { 'author': req.session.username }, { author: req.body.username })
       req.session.username = req.body.username
+    }
   
     res.send(result)
   },

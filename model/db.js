@@ -12,33 +12,80 @@ module.exports = {
     })
   },
   get: async (model, projection, key) => {
-    return await model.find(key, projection).lean()
+    try {
+      return await model.find(key, projection).lean()
+    } catch (err) {
+      return null
+    }
   },
   getOne: async (model, projection, key) => {
-    return await model.findOne(key, projection).lean()
+    try {
+      return await model.findOne(key, projection).lean()
+    } catch (err) {
+      return null
+    }
   },
   getById: async (model, projection, id) => {
-    return await model.findById(id, projection).lean()
+    try {
+      return await model.findById(id, projection).lean()
+    } catch (err) {
+      return null
+    }
   },
   getLastResults: async (model, projection, key, num) => {
-    return await model.find(key, projection).sort('-date').limit(num).lean()
+    try {
+      return await model.find(key, projection).sort('-date').limit(num).lean()
+    } catch (err) {
+      return null
+    }
   },
   getDescending: async (model, projection, key) => {
-    return await model.find(key, projection).sort('-date').lean()
+    try {
+      return await model.find(key, projection).sort('-date').lean()
+    } catch (err) {
+      return null
+    }
   },
   deleteById: async (model, id) => {
-    return await model.findByIdAndDelete(id)
+    try {
+      return await model.findByIdAndDelete(id)
+    } catch (err) {
+      return null
+    }
   },
   create: async (model, data) => {
-    return await model.create(data)
+    try {
+      return await model.create(data)
+    } catch (err) {
+      return null
+    }
   },
   update: async (model, key, data) => {
-    return await model.updateOne(key, { $set: { ...data } })
+    try {
+      return await model.updateOne(key, { $set: { ...data } })
+    } catch (err) {
+      return null
+    }
+  },
+  updateMany: async (model, key, data) => {
+    try {
+      return await model.updateMany(key, { $set: { ...data } })
+    } catch (err) {
+      return null
+    }
   },
   deleteOne: async (model, key) => {
-    return await model.deleteOne(key)
+    try {
+      return await model.deleteOne(key)
+    } catch (err) {
+      return null
+    }
   },
   delete: async (model, key) => {
-    return await model.deleteMany(key)
+    try {
+      return await model.deleteMany(key)
+    } catch (err) {
+      return null
+    }
   }
 }

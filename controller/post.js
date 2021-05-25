@@ -27,14 +27,9 @@ module.exports = {
     })
   },
   postCreate: async (req, res) => {
-    let { fName, lName } = await db.getById(User, 'fName lName', req.session._id)
-    console.log(req.body)
     let data = { 
       ...req.body,
-      author: {
-        username: req.session.username,
-        name: `${fName} ${lName}`
-      } 
+      author: req.session.username
     }
   
     let post = await db.create(Post, data)

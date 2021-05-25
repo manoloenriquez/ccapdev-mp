@@ -295,7 +295,10 @@ async function editPost(event) {
     body: JSON.stringify(data)
   }).then(res => res.json())
 
-  if (!result) return
+  if (!result) {
+    document.getElementById('editmsg').innerText = 'Error editing post.'
+    return
+  }
 
   window.location.href = '/dashboard/manageposts'
 }

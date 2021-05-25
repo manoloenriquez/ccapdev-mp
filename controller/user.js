@@ -8,7 +8,7 @@ module.exports = {
   },
   getUser: async (req, res) => {
     let data = await db.getOne(User, '', { 'username': req.params.username })
-    let posts = await db.get(Post, '', { 'author.username': req.params.username })
+    let posts = await db.get(Post, '', { 'author': req.params.username })
   
     if (data == null) {
       res.render('error', {

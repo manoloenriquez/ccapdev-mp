@@ -10,7 +10,7 @@ module.exports = {
     }
   
     let data = await db.getById(User, '', req.session._id)
-    let posts = await db.get(Post, '', { 'author.username':  req.session.username })
+    let posts = await db.get(Post, '', { 'author':  req.session.username })
   
     res.render('dashboard/profile', {
       layout: 'dashboard',
@@ -40,7 +40,7 @@ module.exports = {
     })
   },
   getManagePosts: async (req, res) => {
-    let posts = await db.get(Post, '', { 'author.username': req.session.username })
+    let posts = await db.get(Post, '', { 'author': req.session.username })
   
     posts.forEach((post) => {
       post.date = post.date.toLocaleDateString()

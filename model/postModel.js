@@ -16,9 +16,8 @@ const postSchema = new mongoose.Schema({
     required: true
   },
   author: {
-    // type: String,
-    username: { type: String },
-    name: { type: String }
+    type: String,
+    required: true
   },
   date: {
     type: Date,
