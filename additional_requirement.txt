@@ -1,0 +1,21 @@
+SPECS IMPLEMENTED
+- Register
+- Log in
+- Log out
+- View account details
+- Edit account details
+- View all posts
+    - Initially we proposed to display 15-20 recent posts but we changed that to 3 posts
+      as not to clutter the home page. With this we also added a button to view all the posts
+      on the bottom of the home page
+- View user profile
+- Create post
+- View post
+- Edit post
+- Delete post
+- Create comment
+- Search for a post
+
+SPECS NOT IMPLEMENTED
+- Like a post / comment
+- User's preferred content
