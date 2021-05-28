@@ -13,7 +13,7 @@ module.exports = {
     })
 
     res.render('index', { 
-      title: 'Express',
+      title: 'TechToday',
       loggedIn: req.session.loggedIn,
       username: req.session.username,
       posts: posts
