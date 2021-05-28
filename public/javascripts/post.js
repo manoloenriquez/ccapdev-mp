@@ -115,6 +115,20 @@ $('form[name="createpost"]').submit((event) => {
     headerimg = `/images/${headerimg}`
   }
 
+  let valid = true
+
+  if (title === '') {
+    $('input[name="title"]').addClass('is-invalid')
+    valid = false
+  }
+
+  if (content === '') {
+    $('textarea[name="content"]').addClass('is-invalid')
+    valid = false
+  }
+
+  if (!valid) return
+
   let data = {
     title: title,
     content: content,

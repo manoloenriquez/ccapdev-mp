@@ -36,6 +36,7 @@ module.exports = {
   },
   postRegister: async (req, res) => {
     const saltRounds = 10
+    console.log(req.body)
     let user = {
       username: req.body.username,
       fName: req.body.fName,
@@ -51,7 +52,7 @@ module.exports = {
     req.session._id = data._id.toString()
     req.session.username = req.body.username
   
-    res.redirect('/enterinfo')
+    res.send(true)
   },
   getEnterInfo: async (req, res) => {
     if (!req.session.loggedIn) {
